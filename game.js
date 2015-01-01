@@ -80,7 +80,9 @@ function GameCntl($scope, $timeout) {
         if($scope.clue == $scope.answer) {
             $scope.correct();
         } else if ($scope.clue.indexOf("_") == -1) {
-            $scope.incorrect(c);
+            $scope.incorrect();
+        } else {
+            $timeout($scope.incorrect, 4000);
         }
     };
 
@@ -99,7 +101,7 @@ function GameCntl($scope, $timeout) {
         $('#jpId').jPlayer("play");
     };
 
-    $scope.incorrect = function(c) {
+    $scope.incorrect = function() {
         $scope.right_indicator = false;
         $scope.wrong_indicator = true;
 
