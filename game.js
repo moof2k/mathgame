@@ -14,6 +14,7 @@ function GameCntl($scope, $timeout) {
     $scope.number_right = 0;
     $scope.timeout = 0;
 
+    $scope.mode = "+";
     $scope.max_x = 10;
     $scope.max_y = 10;
 
@@ -23,15 +24,26 @@ function GameCntl($scope, $timeout) {
     }
 
     $scope.next = function() {
-
         $scope.timeout = 0;
 
-        // Pick a random equation
-        var x = Math.floor(Math.random() * $scope.max_x);
-        var y = Math.floor(Math.random() * $scope.max_y);
+        switch($scope.mode) {
+            case "-":
+                var x = Math.floor(Math.random() * $scope.max_x);
+                var y = Math.floor(Math.random() * x);
+                $scope.equation = x + " - " + y;
+                $scope.equation_spoken = x + " minus " + y;
+                $scope.answer = x - y;
+                break;
 
-        $scope.equation = x + " + " + y;
-        $scope.answer = x + y;
+            case "+":
+            default:
+                var x = Math.floor(Math.random() * $scope.max_x);
+                var y = Math.floor(Math.random() * $scope.max_y);
+                $scope.equation = x + " + " + y;
+                $scope.equation_spoken = x + " plus " + y;
+                $scope.answer = x + y;
+                break;
+        }
 
         $scope.resetclue();
     };
@@ -46,7 +58,7 @@ function GameCntl($scope, $timeout) {
             $scope.clue += "_";
         }
 
-        speak($scope.equation);
+        speak($scope.equation_spoken);
     };
 
     $scope.keyup = function(e) {
@@ -82,7 +94,7 @@ function GameCntl($scope, $timeout) {
         if($scope.timeout != 0) {
             $timeout.cancel($scope.timeout);
         }
-        $scope.timeout = $timeout($scope.next, 3000);
+        $scope.timeout = $timeout($scope.next, 2000);
 
         $('#jpId').jPlayer("play");
     };
