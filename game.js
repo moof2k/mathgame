@@ -81,8 +81,6 @@ function GameCntl($scope, $timeout) {
             $scope.correct();
         } else if ($scope.clue.indexOf("_") == -1) {
             $scope.incorrect();
-        } else {
-            $timeout($scope.incorrect, 4000);
         }
     };
 
