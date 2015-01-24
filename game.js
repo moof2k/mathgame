@@ -15,11 +15,15 @@ function GameCntl($scope, $timeout) {
     $scope.timeout = 0;
 
     $scope.mode = "+";
-    $scope.max_x = 10;
-    $scope.max_y = 10;
+    $scope.range = 10;
 
     $scope.setmode = function(m) {
         $scope.mode = m;
+        $scope.next();
+    }
+
+    $scope.setrange = function(m) {
+        $scope.range = m;
         $scope.next();
     }
 
@@ -28,7 +32,7 @@ function GameCntl($scope, $timeout) {
 
         switch($scope.mode) {
             case "-":
-                var x = Math.floor(Math.random() * $scope.max_x);
+                var x = Math.floor(Math.random() * $scope.range);
                 var y = Math.floor(Math.random() * x);
                 $scope.equation = x + " - " + y;
                 $scope.equation_spoken = x + " minus " + y;
@@ -37,8 +41,8 @@ function GameCntl($scope, $timeout) {
 
             case "+":
             default:
-                var x = Math.floor(Math.random() * $scope.max_x);
-                var y = Math.floor(Math.random() * $scope.max_y);
+                var x = Math.floor(Math.random() * $scope.range);
+                var y = Math.floor(Math.random() * ($scope.range - x));
                 $scope.equation = x + " + " + y;
                 $scope.equation_spoken = x + " plus " + y;
                 $scope.answer = x + y;
