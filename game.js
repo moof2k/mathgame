@@ -31,6 +31,14 @@ function GameCntl($scope, $timeout) {
         $scope.timeout = 0;
 
         switch($scope.mode) {
+            case "*":
+                var x = Math.floor(Math.random() * $scope.range);
+                var y = Math.floor(Math.random() * $scope.range);
+                $scope.equation = x + " x " + y;
+                $scope.equation_spoken = x + " times " + y;
+                $scope.answer = x * y;
+                break;
+
             case "-":
                 var x = Math.floor(Math.random() * $scope.range);
                 var y = Math.floor(Math.random() * x);
